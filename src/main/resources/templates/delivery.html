@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delivery management</title>
+
+
+    <script src="/jquery.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+            crossorigin="anonymous"></script>
+
+    <!--    sweet alert start-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.all.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css" rel="stylesheet">
+    <!--    sweet alert end-->
+
+    <script src="/delivery.js"></script>
+    <script src="/ajaxcommonfunction.js"></script>
+</head>
+<body style="margin-bottom: 30%">
+<div class="container-fluid">
+
+
+    <!--  title area start-->
+    <div class="row p-2">
+        <div class="col--md-12">
+            <h1 class="h1 text-center"
+                style="background-color: #044800; color: whitesmoke; padding: 25px; border-radius: 30px">
+                Delivery management
+            </h1>
+        </div>
+    </div>
+    <!--  title area end-->
+
+    <div class="row mt-2">
+        <div class="col-md-4">
+            <button type="button" class="btn btn-primary" onclick="window.location.replace('/delivery/search')">search by postal code</button>
+        </div>
+    </div>
+
+
+
+    <form onsubmit="return false">
+
+        <div class="row">
+            <div class="col-md-12">
+                <p class="text-danger">required *</p>
+            </div>
+        </div>
+        <!--        state start-->
+        <div class="row">
+            <h3 class="h4">State Information</h3>
+        </div>
+        <div class="row mt-2">
+            <div class="col-md-6">
+                <label for="selectState" class="form-label fw-bold">state <i class="text-danger">*</i></label>
+            </div>
+            <div class="col-md-6">
+                <select id="selectState" class="form-select" onchange="delivery.state=this.value">
+                    <option value="" selected disabled>select an option</option>
+                    <option value="queensland">queensland</option>
+                    <option value="new south wales">new south wales</option>
+                    <option value="victoria">victoria</option>
+                </select>
+            </div>
+        </div>
+        <!--        state end-->
+
+        <!--        city start-->
+        <div class="row">
+            <h3 class="h4">City Information</h3>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-6">
+                <label for="selectCity" class="form-label fw-bold">city <i class="text-danger">*</i></label>
+            </div>
+            <div class="col-md-6">
+                <select id="selectCity" class="form-select" onchange="delivery.city=this.value">
+                    <option value="" selected disabled>select a city</option>
+                    <option value="Brisbane">Brisbane</option>
+                    <option value="Sydney">Sydney</option>
+                    <option value="Melbourne">Melbourne</option>
+                </select>
+            </div>
+        </div>
+        <!--        city end-->
+
+
+        <!--        sub urb start-->
+        <div class="row">
+            <h3 class="h4">Suburb Information</h3>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-6">
+                <label for="txtSuburb" class="form-label fw-bold">suburb <i class="text-danger">*</i></label>
+            </div>
+            <div class="col-md-6">
+                <input type="text" class="form-control" id="txtSuburb" placeholder="enter suburb" onkeyup="delivery.suburb=this.value">
+            </div>
+        </div>
+
+
+        <div class="row mt-2">
+            <div class="col-md-6">
+                <label for="txtSuburbState" class="form-label fw-bold">state <i class="text-danger">*</i></label>
+            </div>
+            <div class="col-md-6">
+                <input type="text" class="form-control" id="txtSuburbState" placeholder="enter state" onkeyup="delivery.suburbstate=this.value">
+            </div>
+        </div>
+
+
+        <div class="row mt-2">
+            <div class="col-md-6">
+                <label for="selectPostalCodeType" class="form-label fw-bold">postal code type <i
+                        class="text-danger">*</i></label>
+            </div>
+            <div class="col-md-6">
+                <select id="selectPostalCodeType" class="form-select" onchange="delivery.postalcodetype=this.value">
+                    <option value="" selected disabled>select an option</option>
+                    <option value="single">single</option>
+                    <option value="single">range</option>
+                    <option value="single">list</option>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="row mt-2">
+            <div class="col-md-6">
+                <label for="txtPostalCode" class="form-label fw-bold">postal code <i
+                        class="text-danger">*</i></label>
+            </div>
+            <div class="col-md-6">
+                <input type="text" class="form-control" id="txtPostalCode" onkeyup="delivery.postalcode=this.value">
+            </div>
+        </div>
+        <!--        sub urb end-->
+
+        <!--delivery cost start-->
+        <div style="background-color: lightcyan">
+            <div class="row">
+                <h3 class="h4">Delivery Cost</h3>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col-md-6">
+                    <label for="txtOrderValueThreshold" class="form-label fw-bold">Order Value Threshold <i
+                            class="text-danger">*</i></label>
+                </div>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" id="txtOrderValueThreshold"
+                           placeholder="enter order value threshold" onkeyup="delivery.ordervaluethreshold=this.value">
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col-md-6">
+                    <label for="txtCostBelowThreshold" class="form-label fw-bold">Cost Below Threshold<i
+                            class="text-danger">*</i></label>
+                </div>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" id="txtCostBelowThreshold"
+                           placeholder="enter cost below threshold" onkeyup="delivery.costbelowthreshold=this.value">
+                </div>
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-primary">add another threshold</button>
+                </div>
+            </div>
+
+                <div class="row mt-2">
+                    <div class="col-md-6">
+                        <label for="txtFixedCost" class="form-label fw-bold">Fixed cost (above threshold) <i
+                                class="text-danger">*</i></label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" id="txtFixedCost" placeholder="enter fixed cost" onkeyup="delivery.fixedcost=this.value">
+                    </div>
+                </div>
+
+
+        </div>
+        <!--delivery cost end-->
+
+
+        <!--        pickup options start-->
+        <div class="mt-2" style="background-color: lightyellow">
+            <div class="row">
+                <h3 class="h4">Pickup Information</h3>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col-md-6">
+                    <label for="textPickupValTh" class="form-label fw-bold">Order Value Threshold <i
+                            class="text-danger">*</i></label>
+                </div>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" id="textPickupValTh" placeholder="Order Value Threshold" onkeyup="delivery.pickupordervalue=this.value">
+                </div>
+            </div>
+
+
+            <div class="row mt-2">
+                <div class="col-md-6">
+                    <label for="textPickupCBTh" class="form-label fw-bold">pickup cost below threshold <i
+                            class="text-danger">*</i></label>
+                </div>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" id="textPickupCBTh"
+                           placeholder="pickup cost below threshold" onkeyup="delivery.pickupbelow=this.value">
+                </div>
+
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-warning">add another threshold</button>
+                </div>
+
+            </div>
+
+
+            <div class="row mt-2">
+                <div class="col-md-6">
+                    <label for="textPickupCtABTh" class="form-label fw-bold">pickup cost above threshold <i
+                            class="text-danger">*</i></label>
+                </div>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" id="textPickupCtABTh"
+                           placeholder="pickup cost above threshold" onkeyup="delivery.pickupcostabove=this.value">
+                </div>
+            </div>
+
+
+        </div>
+        <!--        pickup options end-->
+
+
+        <!--button area start-->
+        <div class="mt-5">
+            <div>
+                <button type="button" class="btn btn-primary">add another city state</button>
+            </div>
+
+
+            <div class="mt-5">
+                <button type="submit" class="btn btn-success" onclick="buttonSubmit()">Submit</button>
+            </div>
+        </div>
+        <!--button area end-->
+
+    </form>
+
+
+</div>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>search</title>
+
+    <script src="/jquery.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+            crossorigin="anonymous"></script>
+
+    <!--    sweet alert start-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.all.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css" rel="stylesheet">
+    <!--    sweet alert end-->
+    <script src="/ajaxcommonfunction.js"></script>
+
+    <script src="/tablecommon.js"></script>
+    <script src="/search.js"></script>
+
+
+
+
+</head>
+<body>
+
+<!--  title area start-->
+<div class="row p-2">
+    <div class="col--md-12">
+        <h1 class="h1 text-center"
+            style="background-color: #044800; color: whitesmoke; padding: 25px; border-radius: 30px">
+            Search by postal code
+        </h1>
+    </div>
+</div>
+<!--  title area end-->
+
+<!--    input and button area start-->
+<div class="row mt-2">
+    <div class="col-md-4">
+        <input type="text" class="form-control text-center" id="textPostalCode" placeholder="enter postal code">
+    </div>
+    <div class="col-md-4">
+        <button type="button" class="btn" style="background-color: forestgreen" onclick="btnSearchPostalCode()">Search by postal code</button>
+    </div>
+</div>
+<!--    input and button area end-->
+
+<!--        <div class="row mt-2">-->
+        <table class="table table-bordered" id="tableDelivery">
+            <thead style="background-color: lightslategray">
+                <th>#</th>
+                <th>state</th>
+                <th>city</th>
+                <th>postal code type</th>
+                <th>postal code</th>
+            </thead>
+            <tbody>
+
+            </tbody>
+
+        </table>
+<!--        </div>-->
+</body>
+</html>
